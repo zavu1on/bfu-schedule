@@ -1,0 +1,33 @@
+version: "1"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - KEY_PASSWORD=5qBW6vEdKG
+      - TZ=Europe/Kaliningrad
+    entrypoint:
+      - ./entrypoint.sh
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=5qBW6vEdKG
+    restart: on-failure
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - web
+      - db
+    ports:
+      - "80:80"
+    volumes:
+      - ./static/:/static
+
