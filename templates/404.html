@@ -1,0 +1,19 @@
+<!doctype html>
+{% load static %}
+<html lang="ru">
+<head>
+    {% include 'include/head.html' %}
+    <title>Ничего не удалось найти</title>
+    <style>
+    </style>
+</head>
+<body>
+    {% include 'include/header.html' %}
+    <div class="container">
+        <center style="margin-top: 2rem;">
+            <img src="{% static 'img/not_found.png' %}" alt="not_found">
+            <h5>Ничего не удалось найти</h5>
+        </center>
+    </div>
+</body>
+</html>

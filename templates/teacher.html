@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    {% include 'include/head.html' %}
+    <title>Расписание для учеников</title>
+</head>
+<body>
+    {% include 'include/header.html' %}
+    <div class="container">
+        <h4>Расписание для преподавателей</h4>
+        <h5 class="my-title">
+            Выберите преподавателя
+        </h5>
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-field">
+                {{ form.teacher }}
+                <label>Выберите преподавателя</label>
+            </div>
+            <h5 style="margin-top: 2rem;">Выберите дату или воспользуйтесь быстрыми кнопками</h5>
+            <div class="input-field">
+                {{ form.date }}
+                <label>Выберите дату</label>
+            </div>
+            <div class="input-field">
+                <button class="waves-effect waves-light btn light-blue darken-3" type="submit" value="today" name="button">Сегодня</button>
+                <button class="waves-effect waves-light btn #039be5 light-blue darken-1" type="submit" value="tomorrow" name="button">Завтра</button>
+                <br>
+                <button class="waves-effect waves-light btn light-blue darken-3" type="submit" value="this_week" name="button" style="margin-top: 8px;">Текущая неделя</button>
+                <button class="waves-effect waves-light btn #039be5 light-blue darken-1" type="submit" value="next_week" name="button" style="margin-top: 8px;">Следующая неделя</button>
+            </div>
+            <br>
+            <button class="btn waves-effect waves-light" type="submit" value="default" name="button">
+                Показать расписание
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            elems = document.querySelectorAll('select');
+            M.FormSelect.init(elems, {});
+
+            elems = document.querySelectorAll('.datepicker');
+            M.Datepicker.init(elems, {});
+        });
+    </script>
+</body>
+</html>

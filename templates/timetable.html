@@ -1,0 +1,52 @@
+<!doctype html>
+{% load static %}
+<html lang="ru">
+<head>
+    {% include 'include/head.html' %}
+    <title>Расписание для {{ title }}</title>
+</head>
+<body>
+    {% include 'include/header.html' %}
+    <div class="container">
+    <h4>Расписание для <strong>{{ title }}</strong> на <strong>{{ date }}</strong></h4>
+    <div class="timetable-container">
+        {% for tt in timetable %}
+            <div class="timetable">
+                <div class="left">
+                    <div class="start-time">
+                        {{ tt.start_time }}
+                    </div>
+                    <div class="end-time">
+                        {{ tt.end_time }}
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="row1">
+                        <div class="student-item">
+                            <span>{{ tt.type }}</span>
+                        </div>
+                        <div class="student-item">
+                            <span>{{ tt.group.name }}</span>
+                        </div>
+                        <div class="student-item">
+                            <span>{{ tt.date }}</span>
+                        </div>
+                    </div>
+                    <div class="row2">
+                        {{ tt.title }}
+                    </div>
+                    <div class="row3">
+                        <div class="student-item">
+                            {{ tt.teacher.name }}
+                        </div>
+                        <div class="student-item">
+                            {{ tt.place }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

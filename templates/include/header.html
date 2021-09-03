@@ -1,0 +1,22 @@
+<nav class="blue darken-1">
+    <div class="nav-wrapper">
+        <a href="/" class="brand-logo"><span>Расписание занятий в БФУ им. Канта</span></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="/">Расписание учеников</a></li>
+            <li><a href="/teachers/">Расписание преподавателей</a></li>
+        </ul>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="/">Расписание учеников</a></li>
+    <li><a href="/teachers/">Расписание преподавателей</a></li>
+</ul>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const elems = document.querySelectorAll('.sidenav');
+        const instances = M.Sidenav.init(elems, {});
+    });
+</script>
