@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+	<head>
+		{% include 'include/head.html' %}
+		<link rel="stylesheet" href="{% static 'css/month.css' %}">
+		<title>Расписание на текущий месяц для {{ group }}</title>
+	</head>
+	<body>
+		{% include 'include/header.html' %}
+		<div class="container">
+			<h4>Расписание на текущий месяц для <strong>{{ group }}</strong></h4>
+			 <table class="centered">
+				<thead>
+					<tr>
+						<th>-</th>
+						{% for date in dates %}
+							<th>{{ date|date:"d b" }}</th>
+						{% endfor %}
+					</tr>
+				</thead>
+				<tbody>
+					{% for time, pair_groups in times.items %}
+						<tr>
+							<td><b>{{ time }}</b></td>
+							{% for pairs in pair_groups %}
+								<td>
+									{% if pairs %}
+										{% for pair in pairs %}
+
+											<p>{{ pair.title }}</p>
+
+										{% endfor %}
+									{% endif %}
+								</td>
+							{% endfor %}
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

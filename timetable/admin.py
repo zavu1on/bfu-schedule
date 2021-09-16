@@ -13,3 +13,4 @@ admin.site.register(TeacherModel)
 class PairTimetableAdmin(admin.ModelAdmin):
     list_display = ('title', 'group', 'teacher', 'start_time', 'date')
     search_fields = ('title', 'group__name', 'teacher__name')
+    ordering = ['date']

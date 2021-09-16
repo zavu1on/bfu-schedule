@@ -60,6 +60,7 @@ class PairTimetableModel(models.Model):
     institute = models.ForeignKey(InstituteModel, models.CASCADE, verbose_name='Институт')
     direction = models.ForeignKey(DirectionModel, models.CASCADE, verbose_name='Направление')
     group = models.ForeignKey(GroupModel, models.CASCADE, verbose_name='Группа')
+    subgroup = models.CharField('Подгруппа', max_length=100, default='Общая подгруппа')
     title = models.CharField('Название пары', max_length=500)
     type = models.CharField('Тип пары', max_length=500)
     start_time = models.TimeField('Время начала')

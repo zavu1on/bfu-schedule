@@ -1,0 +1,30 @@
+:root {
+    --main-color: #2EADE4;
+    --secondary-color: #F48939;
+}
+
+
+table {
+    display: block;
+    max-width: 100vw;
+    overflow-x: auto;
+    flex-grow: 1;
+}
+
+td, th {
+    border: 1px solid rgba(0,0,0,0.12);
+}
+
+thead tr {
+    border-bottom: 2px solid rgba(0,0,0,0.12);
+}
+
+.container {
+    width: 95%;
+    max-width: 100% ;
+}
+
+.my-card {
+    width: 100%;
+    height: 100%;
+}

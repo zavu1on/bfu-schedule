@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     {% include 'include/head.html' %}
-    <title>Расписание для учеников</title>
+    <title>Расписание для преподавателей</title>
 </head>
 <body>
     {% include 'include/header.html' %}
@@ -11,7 +11,7 @@
         <h5 class="my-title">
             Выберите преподавателя
         </h5>
-        <form method="post">
+        <form method="post" style="margin-top: 2rem">
             {% csrf_token %}
             <div class="input-field">
                 {{ form.teacher }}
@@ -39,7 +39,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            elems = document.querySelectorAll('select');
+            let elems = document.querySelectorAll('select');
             M.FormSelect.init(elems, {});
 
             elems = document.querySelectorAll('.datepicker');

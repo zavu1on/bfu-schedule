@@ -20,3 +20,10 @@ class TeacherForm(forms.Form):
     date = forms.CharField(required=False, widget=forms.TextInput(attrs={
         'class': 'datepicker'
     }))
+
+
+class ChooseGroupForm(forms.Form):
+
+    group = forms.ModelChoiceField(
+        queryset=GroupModel.objects.order_by('name'),
+    )

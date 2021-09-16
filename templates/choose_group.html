@@ -1,0 +1,32 @@
+<!doctype html>
+{% load static %}
+<html lang="ru">
+<head>
+    {% include 'include/head.html' %}
+    <title>Расписание на месяц</title>
+</head>
+<body>
+{% include 'include/header.html' %}
+    <div class="container">
+        <h4>Выберите группу, чтобы увидеть расписание на текущий месяц</h4>
+        <form method="post" style="margin-top: 2.2rem">
+            {% csrf_token %}
+            <div class="input-field">
+                {{ form.group }}
+                <label>Выберите группу</label>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" value="default" name="button">
+                Показать расписание
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+
+    <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                let elems = document.querySelectorAll('select');
+                M.FormSelect.init(elems, {});
+            });
+    </script>
+</body>
+</html>

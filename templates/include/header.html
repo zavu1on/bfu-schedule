@@ -5,6 +5,7 @@
         <ul class="right hide-on-med-and-down">
             <li><a href="/">Расписание учеников</a></li>
             <li><a href="/teachers/">Расписание преподавателей</a></li>
+            <li><a href="/month-table/">Посмотреть загруженность этого месяца</a></li>
         </ul>
     </div>
 </nav>
@@ -12,11 +13,22 @@
 <ul class="sidenav" id="mobile-demo">
     <li><a href="/">Расписание учеников</a></li>
     <li><a href="/teachers/">Расписание преподавателей</a></li>
+    <li><a href="/month-table/">Посмотреть загруженность месяца</a></li>
 </ul>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const elems = document.querySelectorAll('.sidenav');
-        const instances = M.Sidenav.init(elems, {});
-    });
-</script>
+        const elems = document.querySelectorAll('.sidenav')
+        const instances = M.Sidenav.init(elems, {})
+    })
+
+    window.addEventListener('resize', event => {
+        if (window.innerWidth <= 585) {
+            document.querySelector('.brand-logo').innerText = 'Расписание'
+        }
+        else if (window.innerWidth <= 992) {
+            document.querySelector('.brand-logo').innerText = 'Расписание занятий'
+        }
+    })
+
+;</script>
