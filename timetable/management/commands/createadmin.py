@@ -1,28 +1,26 @@
-from django.contrib.auth.management.commands import createsuperuser
-from django.core.management import CommandError
+from django.contrib.auth.models import User
+from django.core.management import BaseCommand
+from Schedule.settings import KEY_PASSWORD
 
 
-class Command(createsuperuser.Command):
-    help = 'Crate a superuser, and allow password to be provided'
-
+class Command(BaseCommand):
     def add_arguments(self, parser):
-        super(Command, self).add_arguments(parser)
-        parser.add_argument(
-            '--password', dest='password', default=None,
-            help='Specifies the password for the superuser.',
-        )
+        parser.add_argument('--debug', action='store_true')
 
     def handle(self, *args, **options):
-        password = options.get('password')
-        username = options.get('username')
-        database = options.get('database')
+        is_debug = bool(options['debug'])
 
-        if password and not username:
-            raise CommandError("--username is required if specifying --password")
+        if is_debug:
+            User.objects.create_superuser(
+                username='admin',
+                email=None,
+                password='admin'
+            )
+        else:
+            User.objects.create_superuser(
+                username='admin',
+                email=None,
+                password=KEY_PASSWORD
+            )
 
-        super(Command, self).handle(*args, **options)
-
-        if password:
-            user = self.UserModel._default_manager.db_manager(database).get(username=username)
-            user.set_password(password)
-            user.save()
+        self.stdout.write(self.style.SUCCESS('SuperUser created successfully!'))

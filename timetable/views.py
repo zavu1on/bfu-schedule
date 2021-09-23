@@ -1,3 +1,4 @@
+import logging
 from json import loads, load
 from datetime import datetime, timedelta, time
 from dateutil.relativedelta import relativedelta
@@ -16,6 +17,9 @@ from .service import get_week, get_button, get_month, get_pair_times
 # Create your views here.
 
 
+logger = logging.getLogger(__name__)
+
+
 @method_decorator(csrf_exempt, name='dispatch')
 class AddTimetableView(View):
 
@@ -23,6 +27,7 @@ class AddTimetableView(View):
         body = loads(request.body.decode('utf8'))
 
         if body['key_pass'] != KEY_PASSWORD:
+            logger.warning('Запрос на добавление расписания был отвергнут из-за неверного KeyPass')
             return HttpResponseForbidden('KeyPass is wrong!'.encode('utf8'))
 
         InstituteModel.objects.all().delete()
@@ -68,6 +73,7 @@ class AddTimetableView(View):
                             date=timetable['date'].split('T')[0]
                         )
 
+        logger.info('Расписание было успешно обновлено')
         return JsonResponse({'success': True})
 
 
@@ -93,10 +99,12 @@ def get_timetable_view(request: WSGIRequest):
                         if _start <= date <= _start + timedelta(7):
                             resp[_el][_institute][_directions].append(item)
 
+        logger.info('Было запрошено расписание с {} до {}'.format(_start, _start + timedelta(7)))
         return JsonResponse(resp)
 
 
 class AbitsTimetableView(View):
+
     def get(self, request: WSGIRequest):
 
         return render(request, 'abits.html', {

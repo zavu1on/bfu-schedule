@@ -8,6 +8,7 @@ services:
     environment:
       - KEY_PASSWORD=5qBW6vEdKG
       - TZ=Europe/Kaliningrad
+      - LOG_LEVEL=WARNING
     entrypoint:
       - ./entrypoint.sh
     depends_on:

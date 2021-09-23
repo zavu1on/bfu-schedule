@@ -90,6 +90,37 @@ DATABASES = {
     }
 }
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': getenv('LOG_LEVEL', 'INFO'),
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'log.log',
+            'encoding': 'utf8',
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'timetable.handlers.ConsoleHandler'
+        }
+    },
+    'loggers': {
+        'timetable': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': True
+        }
+    }
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -128,7 +159,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
 # STATICFILES_DIRS = [BASE_DIR / 'static']
 
-KEY_PASSWORD = getenv('KEY_PASSWORD')
+KEY_PASSWORD = getenv('KEY_PASSWORD', '')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
