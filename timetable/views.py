@@ -73,7 +73,7 @@ class AddTimetableView(View):
                             date=timetable['date'].split('T')[0]
                         )
 
-        logger.info('Расписание было успешно обновлено')
+        logger.info(msg='Расписание было успешно обновлено')
         return JsonResponse({'success': True})
 
 

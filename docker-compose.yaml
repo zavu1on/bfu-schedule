@@ -31,3 +31,4 @@ services:
       - "80:80"
     volumes:
       - ./static/:/static
+      - ./log.log:log.log
